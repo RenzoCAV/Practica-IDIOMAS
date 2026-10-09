@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- HTML organiza el contenido; CSS lo diseña y JavaScript le da comportamiento. -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <!-- Permite usar el ancho real del celular o la tablet. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6d28d9">
+    <meta name="description" content="Práctica de inglés y alemán con teoría, ejercicios y metas personales.">
+    <title>Entre idiomas · Tu espacio de práctica</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%236d28d9'/%3E%3Ctext x='20' y='28' text-anchor='middle' font-family='Arial' font-size='25' font-weight='bold' fill='white'%3EE%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="styles.css">
+    <!-- defer ejecuta el código cuando el HTML ya está disponible. -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <a class="skip" href="#contenido">Saltar al contenido</a>
+    <header class="cabecera">
+        <div class="marca"><span class="logo" aria-hidden="true">E.</span><div><strong>Entre idiomas</strong><span>Tu espacio de práctica</span></div></div>
+        <span class="etiqueta">INGLÉS + ALEMÁN</span>
+    </header>
+    <main id="contenido">
+        <div class="introduccion"><div><p class="ceja">VOLVÉ A ENCONTRAR LAS PALABRAS</p><h1>Tu próxima práctica.</h1><p>Un tema, un consejo y un paso más.</p></div>
+            <!-- aria-pressed comunica qué idioma está seleccionado. -->
+            <div class="idiomas" role="group" aria-label="Idioma de práctica"><button id="boton-ingles" aria-pressed="true">English <span>EN</span></button><button id="boton-aleman" aria-pressed="false">Deutsch <span>DE</span></button></div>
+        </div>
+        <!-- La navegación cambia paneles sin recargar la página. -->
+        <nav aria-label="Secciones"><button data-vista="inicio" aria-current="page">Inicio</button><button data-vista="teoria">Teoría</button><button data-vista="practica">Práctica</button><button data-vista="premios">Premios</button></nav>
+        <section id="vista-inicio" class="vista" aria-label="Inicio">
+            <div class="cuadricula">
+                <article class="tarjeta principal"><p class="ceja">TU SESIÓN DE HOY</p><span id="nivel" class="capsula">REPASO INTERMEDIO / AVANZADO</span><h2 id="titulo-practica"></h2><p id="descripcion-practica"></p><div class="detalle">Teoría breve · 4 ejercicios · A tu ritmo</div><button class="primario" id="boton-practicar">Practicar ahora</button><p class="nota clara">Sin reloj ni penalizaciones. Podés volver a intentarlo.</p></article>
+                <article class="tarjeta meta"><p class="ceja">TU PRÓXIMA META</p><h2 id="nombre-meta"></h2><p id="descripcion-meta"></p><label for="progreso-meta" id="texto-progreso"></label><progress id="progreso-meta" max="5" value="0"></progress><div class="estadisticas"><div><strong id="total-sesiones">0</strong><span>prácticas</span></div><div><strong id="total-puntos">0</strong><span>puntos</span></div><div><strong id="total-dominio">0</strong><span>aciertos únicos</span></div></div><p class="nota">Progreso independiente para cada idioma.</p></article>
+                <article class="tarjeta consejo"><div class="fila"><p class="ceja">UNA FRASE PARA LLEVARTE</p><span class="capsula" id="registro-consejo"></span></div><h2 id="frase-consejo"></h2><p id="significado-consejo"></p><p id="uso-consejo"></p><blockquote id="ejemplo-consejo"></blockquote><div class="acciones"><button id="boton-guardar">Guardar consejo</button><button id="otro-consejo" class="texto">Otro consejo</button></div><p class="nota">Expresiones habituales; no es un seguimiento en vivo de tendencias.</p></article>
+                <article class="tarjeta"><p class="ceja">RECUPERÁ LO QUE TE CUESTA</p><h2>Un repaso a tiempo.</h2><p>Los ejercicios que fallás quedan pendientes hasta que los respondas bien.</p><p id="pendientes-texto"></p><button id="boton-repasar">Repasar errores</button><div class="separador"></div><h3>Consejos guardados</h3><div id="guardados"></div></article>
+            </div>
+        </section>
+        <section id="vista-teoria" class="vista" hidden aria-label="Biblioteca de teoría"><div class="titulo-seccion"><p class="ceja">ENTENDÉ EL PORQUÉ</p><h2>Tu biblioteca de teoría.</h2><p>Leé los ejemplos y después ponelos en práctica.</p></div><div id="biblioteca" class="lista-unidades"></div></section>
+        <section id="vista-practica" class="vista" hidden aria-label="Elegir práctica"><div class="titulo-seccion"><p class="ceja">USÁ LO QUE YA SABÉS</p><h2>Elegí tu próximo desafío.</h2><p>Podés repetir cualquier unidad para consolidarla.</p></div><div id="unidades" class="lista-unidades"></div></section>
+        <section id="vista-premios" class="vista" hidden aria-label="Metas y premios"><div class="titulo-seccion"><p class="ceja">CADA PASO CUENTA</p><h2>Tu esfuerzo tiene premio.</h2></div><div id="medallas" class="lista-unidades"></div><article class="tarjeta premio-personal"><h3>Un premio elegido por vos</h3><p>Después de 20 prácticas completas en este idioma. Vos decidís cómo celebrarlo.</p><form id="form-premio"><label for="premio-personal">Mi recompensa</label><div class="acciones"><input id="premio-personal" maxlength="100" placeholder="Ej.: una salida con amigos" required><button class="primario" type="submit">Guardar</button></div></form><p id="estado-premio"></p></article></section>
+        <p id="mensaje" role="status" aria-live="polite"></p>
+    </main>
+    <footer>Hecho para practicar, no para empezar de cero.<br>El progreso se guarda solo en este navegador; no se sincroniza entre dispositivos.</footer>
+    <!-- dialog ofrece una ventana accesible y mantiene el foco dentro de la sesión. -->
+    <dialog id="sesion" aria-labelledby="titulo-sesion"><div class="dialogo-cabecera"><span id="paso-sesion" class="ceja"></span><button id="cerrar-sesion" aria-label="Cerrar práctica">✕</button></div><h2 id="titulo-sesion"></h2><div id="cuerpo-sesion"></div><div id="acciones-sesion" class="acciones"></div></dialog>
+</body>
+</html>
